@@ -25,28 +25,22 @@
     header {
       background: var(--red);
       color: #fff;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem 2rem;
       text-align: center;
     }
-    header .logo-ring {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-      overflow: hidden;           /* ensures SVG doesn't overflow the circle */
+    header .logo {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 1rem;
+      display: block;
     }
-    header .logo-ring img {
+    header .logo img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.03em; }
-    header p { margin-top: 0.35rem; opacity: 0.9; font-size: 1rem; }
+    header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: 0.03em; }
+    header p { margin-top: 0.5rem; opacity: 0.9; font-size: 1.1rem; }
     /* ── Layout ── */
     main {
       max-width: 760px;
@@ -186,7 +180,7 @@
 </head>
 <body>
 <header>
-  <div class="logo-ring">
+  <div class="logo">
     <img src="/media/logo.svg" alt="FunGuyAI Logo">
   </div>
   <h1>FunGuyAI Support</h1>
