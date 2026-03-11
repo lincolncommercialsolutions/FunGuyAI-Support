@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FunGuyAI – Support</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F4ECD8;
+      --surface: #FDF7EC;
+      --red:     #B8231A;
+      --red-dk:  #8C1A14;
+      --text:    #2A1208;
+      --muted:   #7A5540;
+      --border:  #DDD0B3;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--red);
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header .logo-ring {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.03em; }
+    header p  { margin-top: 0.35rem; opacity: 0.9; font-size: 1rem; }
+
+    /* ── Layout ── */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text); }
+    .card p, .card li { font-size: 0.97rem; color: var(--muted); }
+    .card ul { padding-left: 1.3rem; }
+    .card ul li { margin-bottom: 0.4rem; }
+    .card a { color: var(--red); text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
+
+    /* ── FAQ ── */
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 0;
+    }
+    details:last-child { border-bottom: none; }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: var(--text);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--red);
+      transition: transform 0.2s;
+    }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: 0.5rem; font-size: 0.93rem; color: var(--muted); padding-left: 0.5rem; }
+
+    /* ── Contact Form ── */
+    .form-group { margin-bottom: 1.1rem; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    label .optional {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.97rem;
+      color: var(--text);
+      font-family: inherit;
+      transition: border-color 0.18s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--red);
+    }
+    textarea { resize: vertical; min-height: 130px; }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.18s, opacity 0.18s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--red-dk); }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    /* ── Status messages ── */
+    .status {
+      display: none;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-size: 0.93rem;
+      margin-top: 1rem;
+    }
+    .status.success {
+      display: block;
+      background: #e6f4ea;
+      border: 1px solid #a8d5b0;
+      color: #1e5631;
+    }
+    .status.error {
+      display: block;
+      background: #fde8e7;
+      border: 1px solid #f5b7b4;
+      color: #7b1513;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--red); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-ring">🍄</div>
+  <h1>FunGuyAI Support</h1>
+  <p>We're here to help you identify fungi safely.</p>
+</header>
+
+<main>
+
+  <!-- About the App -->
+  <div class="card">
+    <span class="card-title">About</span>
+    <h2>What is FunGuyAI?</h2>
+    <p>FunGuyAI is an AI-powered fungi identification app for iOS. Take a photo of any mushroom and get an instant species suggestion powered by Google Gemini, enriched with real-world sightings from iNaturalist and Mushroom Observer.</p>
+    <br/>
+    <ul>
+      <li>AI identification using your camera or photo library</li>
+      <li>Location-based context to improve accuracy</li>
+      <li>Toxicity warnings and safety notes for every result</li>
+      <li>Lookalike species with key distinguishing features</li>
+      <li>Community sighting data from iNaturalist &amp; Mushroom Observer</li>
+    </ul>
+  </div>
+
+  <!-- Safety Warning -->
+  <div class="card">
+    <span class="card-title">⚠ Safety Notice</span>
+    <h2>Never Eat Based on App Identification Alone</h2>
+    <p>FunGuyAI is for educational and informational purposes only. AI identification can be incorrect. <strong style="color:var(--red)">Never consume any wild mushroom</strong> based solely on an app's suggestion. Always verify with an expert mycologist before eating any foraged fungi. Some species are deadly even in small amounts.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card">
+    <span class="card-title">FAQ</span>
+
+    <details>
+      <summary>How accurate is the identification?</summary>
+      <p>FunGuyAI uses Google Gemini AI, which achieves solid general accuracy on common species. However, accuracy decreases for rare species, immature specimens, and poor-quality photos. Always treat any AI identification as a starting point, not a definitive answer.</p>
+    </details>
+
+    <details>
+      <summary>Why does the app need my location?</summary>
+      <p>Location is optional but improves accuracy. Many mushroom species are geographically bounded — knowing your region helps filter iNaturalist and Mushroom Observer sightings to matches near you, making identification more relevant.</p>
+    </details>
+
+    <details>
+      <summary>What photo quality gives the best results?</summary>
+      <p>For best results: photograph the cap (top), gills or pores (underside), and stem. Include a mushroom in natural lighting on its natural substrate. Multiple angles submitted as one crop helps. Avoid blurry or heavily shadowed photos.</p>
+    </details>
+
+    <details>
+      <summary>Is my photo stored or shared?</summary>
+      <p>Photos are sent to our backend for AI analysis and are <strong>not stored</strong> on our servers. The image data is passed directly to the AI model and discarded after the response is returned. See our <a href="https://fun-guy-ai-privacy-policy.vercel.app/">Privacy Policy</a> for full details.</p>
+    </details>
+
+    <details>
+      <summary>Does the app work offline?</summary>
+      <p>No. FunGuyAI requires an internet connection to communicate with the AI model and to fetch sighting data from iNaturalist and Mushroom Observer. Offline identification is not currently supported.</p>
+    </details>
+
+    <details>
+      <summary>How do I report incorrect identifications?</summary>
+      <p>Use the contact form below and select "Incorrect Identification" as the subject. Please include a description of the expected species, your location, and the photo if possible. Your feedback helps us improve the service.</p>
+    </details>
+
+    <details>
+      <summary>Which platforms is FunGuyAI available on?</summary>
+      <p>FunGuyAI is currently available on iOS (iPhone). An Android version is in development.</p>
+    </details>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="card">
+    <span class="card-title">Contact Us</span>
+    <h2>Send Us a Message</h2>
+    <p style="margin-bottom:1.2rem;">Have a question, bug report, or feedback? Fill out the form below and we'll get back to you as soon as possible.</p>
+
+    <form id="contactForm" novalidate>
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject <span class="optional">(optional)</span></label>
+        <select id="subject" name="subject">
+          <option value="">— Select a topic —</option>
+          <option value="General Question">General Question</option>
+          <option value="Incorrect Identification">Incorrect Identification</option>
+          <option value="Bug Report">Bug Report</option>
+          <option value="Feature Request">Feature Request</option>
+          <option value="Privacy / Data">Privacy / Data</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Describe your question or issue in detail…" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Send Message</button>
+
+      <div id="statusMsg" class="status"></div>
+    </form>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 FunGuyAI &nbsp;·&nbsp; <a href="https://fun-guy-ai-privacy-policy.vercel.app/">Privacy Policy</a></p>
+  <p style="margin-top:0.4rem;">For urgent safety concerns, call Poison Control: <a href="tel:18002221222">1-800-222-1222</a></p>
+</footer>
+
+<script>
+  // ── Update this to your deployed backend URL after `serverless deploy` ──
+  const API_URL = 'https://YOUR_LAMBDA_URL/contact';
+  // For local testing: const API_URL = 'http://localhost:3001/contact';
+
+  const form      = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('statusMsg');
+
+  function showStatus(type, message) {
+    statusMsg.className = 'status ' + type;
+    statusMsg.textContent = message;
+    statusMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function clearStatus() {
+    statusMsg.className = 'status';
+    statusMsg.textContent = '';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearStatus();
+
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Client-side validation
+    if (!name) {
+      showStatus('error', 'Please enter your full name.');
+      document.getElementById('name').focus();
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showStatus('error', 'Please enter a valid email address.');
+      document.getElementById('email').focus();
+      return;
+    }
+    if (!message) {
+      showStatus('error', 'Please enter a message before submitting.');
+      document.getElementById('message').focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject: subject || 'General Question', message }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.ok) {
+        showStatus('success', '✓ Message sent! We\'ll be in touch at ' + email + ' as soon as possible.');
+        form.reset();
+      } else {
+        showStatus('error', data.error || 'Something went wrong. Please try again later.');
+      }
+    } catch (err) {
+      showStatus('error', 'Could not reach the server. Please check your connection and try again.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+    }
+  });
+</script>
+
+</body>
+</html>
